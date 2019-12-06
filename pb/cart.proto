@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+package pb;
+
+service RouteGuide {
+    rpc Health(Empty) returns (HealthMessage) {
+        option(google.api.http) = {
+            get: "/health"
+        };
+    };
+    rpc Add(AddRequest) returns (StatusMessage) {
+        option(google.api.http) = {
+            put: "/cart",
+            body: "*"
+        };
+    };
+    rpc Delete(DeleteRequest) returns (StatusMessage) {
+        option(google.api.http) = {
+            delete: "/cart"
+        };
+    };
+    rpc Get(Cart) returns (GetResponse) {
+        option(google.api.http) = {
+            get: "/cart"
+        };
+    };
+}
+
+message Empty {
+}
+
+message HealthMessage {
+    string message = 1;
+}
+
+message StatusMessage {
+    bool ok = 1;
+    int32 code = 2;
+    string message = 3;
+}
+
+message Cart {
+    int32 id = 1;
+}
+
+message Product {
+    int32 id = 1;
+    string name = 2;
+    int32 price = 3;
+}
+
+message ProductItem {
+   Product product = 1;
+   int32 quantity = 2;
+   int32 amount = 3;
+}
+
+message AddRequest {
+    Cart cart = 1;
+    Product product = 2;
+    int32 quantity = 3;
+}
+
+message DeleteRequest {
+    int32 cartId = 1;
+    int32 productId = 2;
+    int32 quantity = 3;
+}
+
+message GetResponse {
+    Cart cart = 1;
+    repeated ProductItem products = 2;
+    int32 quantity = 3;
+    int32 amount = 4;
+}
