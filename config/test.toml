@@ -1,0 +1,3 @@
+[Server]
+GrpcPort = 8090
+RESTPort = 8080
