@@ -1,3 +1,11 @@
+DBUrl = 'postgres://cart:secret@127.0.0.1:5432/cart'
+
 [Server]
 GrpcPort = 8090
 RESTPort = 8080
+
+[Db]
+Host = 'localhost'
+Database = 'cart'
+User = 'cart'
+Password = 'secret'

@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS  carts (
+    "id" SERIAL NOT NULL PRIMARY KEY,
+    "products" JSON
+)

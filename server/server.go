@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/arrim/go-cart/app/handlers"
+	"github.com/arrim/go-cart/app/repository"
 	"github.com/arrim/go-cart/pb"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"google.golang.org/grpc"
@@ -24,8 +25,11 @@ type Options struct {
 	RESTPort int
 }
 
-func NewServer(options Options) *Server {
-	return &Server{options: options}
+func NewServer(options Options, r *repository.Repository) *Server {
+	return &Server{
+		server:  handlers.NewRouterGuideServer(r),
+		options: options,
+	}
 }
 
 func (s *Server) Start() {

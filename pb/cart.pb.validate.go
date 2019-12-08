@@ -181,6 +181,8 @@ func (m *StatusMessage) Validate() error {
 
 	// no validation rules for Message
 
+	// no validation rules for Id
+
 	return nil
 }
 
@@ -460,15 +462,7 @@ func (m *AddRequest) Validate() error {
 		return nil
 	}
 
-	if v, ok := interface{}(m.GetCart()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return AddRequestValidationError{
-				field:  "Cart",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for Id
 
 	if v, ok := interface{}(m.GetProduct()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
@@ -547,7 +541,7 @@ func (m *DeleteRequest) Validate() error {
 		return nil
 	}
 
-	// no validation rules for CartId
+	// no validation rules for Id
 
 	// no validation rules for ProductId
 
@@ -618,15 +612,7 @@ func (m *GetResponse) Validate() error {
 		return nil
 	}
 
-	if v, ok := interface{}(m.GetCart()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetResponseValidationError{
-				field:  "Cart",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for Id
 
 	for idx, item := range m.GetProducts() {
 		_, _ = idx, item
