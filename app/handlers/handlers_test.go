@@ -110,6 +110,29 @@ func TestRouteGuideServer_Delete(t *testing.T) {
 		request *pb.DeleteRequest
 	}
 
+	cartMock.SetData(cartMock.Carts{
+		{
+			ID: 1,
+			Products: []*pb.ProductItem{
+				{
+					Product: &pb.Product{
+						Id:    1,
+						Price: 50,
+					},
+					Quantity: 2,
+					Amount:   100,
+				},
+				{
+					Product: &pb.Product{
+						Id:    2,
+						Price: 100,
+					},
+					Quantity: 4,
+					Amount:   400,
+				},
+			},
+		},
+	})
 	repo := repository.NewRepository(cartMock.NewMockCartRepo())
 
 	tests := []struct {
